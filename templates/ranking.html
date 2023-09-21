@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scoreboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1 class="scoreboard-title">
+        <img src="{{ url_for('static', filename='logo-blaise-pascal.jpg') }}" alt="Logo" class="logo">
+        Scoreboard Allenamenti I.S. Pascal-Comandini
+    </h1>
+    
+    <div>
+        <table>
+            <tr>
+                <th>User</th>
+                {% for problem in problems %}
+                <th>{{ problem }}</th>
+                {% endfor %}
+                <th>Total</th>
+            </tr>
+            {% for row in data %}
+            <tr>
+                <td class="user-name">{{ row['User'] }}</td>
+                {% for problem in problems %}
+                <td style="background-color: rgba(0, 255, 0, {{ row[problem] / 100.0 }});">{{ row[problem] }}</td>
+                {% endfor %}
+                <td>{{ row['Total'] }}</td>                    
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <div class="last-updated">
+            Last Updated: {{ current_time }}
+        </div>
+        <div class="time-loading">
+            Time Elapsed: {{ time_elapsed }}s
+        </div>
+    </div>
+    
+    <footer class="cool-footer">
+        <p>Author: @mazzasimon</p>
+    </footer>
+</body>
+</html>

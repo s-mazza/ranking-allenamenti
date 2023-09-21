@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+}
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}
+/*
+.user-row:nth-child(even) {
+    background-color: #f2f2f2;
+}
+*/
+/*
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}*/
+tr:hover {
+    background-color: #ddd;
+}
+.scoreboard-title {
+    border: 2px solid #007700; /* You can adjust the border color as needed */
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+}
+/* Add this CSS to your existing style.css file or link a new CSS file */
+
+.cool-footer {
+    background-color: #333; /* Background color for the footer */
+    color: #fff; /* Text color */
+    padding: 10px 0; /* Padding for top and bottom */
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.cool-footer a {
+    color: #007700; /* Link color */
+    text-decoration: none;
+}
+
+.cool-footer a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.user-name {
+    font-size: 18px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold if desired */
+}
+.logo {
+    max-width: 80px; /* Adjust the maximum width as needed */
+    max-height: 80px; /* Adjust the maximum height as needed */
+    vertical-align: middle; /* Align the logo vertically within the line */
+}
+
+.last-updated, .time-loading {
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+    text-align: right;
+    margin-right: 190px; /*this sucks ma chatgpt non ha pensato abbastanza forte*/
+}
+.time-loading {
+    margin-top: 10px;
+}
