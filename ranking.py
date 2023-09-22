@@ -1,23 +1,13 @@
 from flask import Flask, render_template
-import requests, datetime,time
+import requests, datetime,time,random
 app = Flask(__name__)
 RANKING_HTML = 'ranking.html'
 
-# Define the list of problems
 problems = ["easy1", "oii_pangramma", "ois_constellation", "ois_tractor", "ois_candies", "ois_dream", "ois_dristor2", "ois_monopoly", "ois_panama", "ois_patrol", "ois_sumtree", "ois_tournament2", "ois_vendingmachines"]
-#users = ["Matteo Arcari", "Serena Federici", "Matteo Disconsi", "Lorenzo Bianchi", "Vincenzo Sanzone", "Edi De Candido"]
 users = ["lorenzoferrari", "Mazza", "eliasol", "eric", "nicolas", "pety", "barchero", "Yeah", "hoom","0xA1E", "Alan_Bovo", "leo.perretta"]
 
-'''
-data = [
-    {"User": "Matteo Arcari", "circuito": 100, "fortezza": 100, "tubature": 100, "spesa":50,"Total": 300},
-    {"User": "Serena Federici", "circuito": 100, "fortezza": 60, "tubature": 30, "spesa":50,"Total": 190},
-    {"User": "Matteo Disconsi", "circuito": 100, "fortezza": 60, "tubature": 0, "spesa":50,"Total": 160},
-    {"User": "Lorenzo Bianchi", "circuito": 100, "fortezza": 30, "tubature": 30, "spesa":50,"Total": 160},
-    {"User": "Vincenzo Sanzone", "circuito": 100, "fortezza": 0, "tubature": 30, "spesa":30,"Total": 130},
-    {"User": "Edi De Candido", "circuito": 31, "fortezza": 0, "tubature": 0, "spesa":50,"Total": 31},
-]
-'''
+#per evitare i tempi dell'api
+data_dev = [{'User': 'lorenzo ferrari (lorenzoferrari)', 'easy1': random.randint(0,100), 'oii_pangramma': random.randint(0,100), 'ois_constellation': random.randint(0,100), 'ois_tractor': random.randint(0,100), 'ois_candies': random.randint(0,100), 'ois_dream': random.randint(0,100), 'ois_dristor2': random.randint(0,100), 'ois_monopoly': random.randint(0,100), 'ois_panama': random.randint(0,100), 'ois_patrol': random.randint(0,100), 'ois_sumtree': random.randint(0,100), 'ois_tournament2': random.randint(0,100), 'ois_vendingmachines': random.randint(0,100), 'Total': 1300}, {'User': 'Simone Mazzacano (Mazza)', 'easy1': random.randint(0,100), 'oii_pangramma': random.randint(0,100), 'ois_constellation': random.randint(0,100), 'ois_tractor': 64, 'ois_candies': random.randint(0,100), 'ois_dream': random.randint(0,100), 'ois_dristor2': 0, 'ois_monopoly': random.randint(0,100), 'ois_panama': 0, 'ois_patrol': random.randint(0,100), 'ois_sumtree': 0, 'ois_tournament2': random.randint(0,100), 'ois_vendingmachines': random.randint(0,100), 'Total': 964}, {'User': 'ERIC AQUILOTTI (eric)', 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': random.randint(0,100), 'ois_tractor': 61, 'ois_candies': random.randint(0,100), 'ois_dream': random.randint(0,100), 'ois_dristor2': 70, 'ois_monopoly': random.randint(0,100), 'ois_panama': 0, 'ois_patrol': 10, 'ois_sumtree': 0, 'ois_tournament2': random.randint(0,100), 'ois_vendingmachines': random.randint(0,100), 'Total': 841}, {'User': 'Elia Soldati (eliasol)', 'easy1': random.randint(0,100), 'oii_pangramma': random.randint(0,100), 'ois_constellation': random.randint(0,100), 'ois_tractor': 0, 'ois_candies': random.randint(0,100), 'ois_dream': random.randint(0,100), 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': random.randint(0,100), 'Total': 600}, {'User': 'Edoardo Balistri (hoom)', 'easy1': random.randint(0,100), 'oii_pangramma': random.randint(0,100), 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': random.randint(0,100), 'ois_dream': 70, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 75, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': 445}, {'User': 'Alan Davide Bovo (Alan_Bovo)', 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': random.randint(0,100), 'ois_dream': 35, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': random.randint(0,100), 'ois_vendingmachines': random.randint(0,100), 'Total': 435}, {'User': 'Leonardo Perretta (leo.perretta)', 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': random.randint(0,100), 'ois_vendingmachines': random.randint(0,100), 'Total': 300}, {'User': 'Nicolas Benatti (nicolas)', 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': random.randint(0,100)}, {'User': 'Petichan Zeul (pety)', 'easy1': 0, 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': random.randint(0,100), 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': random.randint(0,100)}, {'User': 'Francesco Barcherini (barchero)', 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': random.randint(0,100)}, {'User': "Thomas D'angelo (Yeah)", 'easy1': random.randint(0,100), 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': 0, 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': random.randint(0,100)}, {'User': 'Bob Jhonny (0xA1E)', 'easy1': 0, 'oii_pangramma': 0, 'ois_constellation': 0, 'ois_tractor': 0, 'ois_candies': 0, 'ois_dream': 0, 'ois_dristor2': 0, 'ois_monopoly': 0, 'ois_panama': random.randint(0,100), 'ois_patrol': 0, 'ois_sumtree': 0, 'ois_tournament2': 0, 'ois_vendingmachines': 0, 'Total': random.randint(0,100)}]
 
 def load_data_user(username: str):
     json_data = {
@@ -44,6 +34,7 @@ def load_data_user(username: str):
     row['Total'] = sum
     return row
 
+#0 ottimizzazione nel caricarla, richiedo anche i full score
 def load_data():
     data = []
     for user in users:
@@ -64,5 +55,15 @@ def scoreboard():
     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return render_template(RANKING_HTML, data=data, problems=problems,current_time=current_time,time_elapsed=time_elapsed)
 
+'''
+@app.route('/dev')
+def scoreboard_dev():
+    start_time = time.time()
+    data = data_dev 
+    data.sort(key=lambda x: x['Total'], reverse=True)
+    time_elapsed = round(time.time() - start_time, 2)
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return render_template(RANKING_HTML, data=data, problems=problems,current_time=current_time,time_elapsed=time_elapsed)
+'''
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,3 +1,10 @@
+* {
+    margin-left: 2px;
+    margin-right: 3px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
 }
@@ -40,13 +47,16 @@ tr:hover {
     padding: 10px 0; /* Padding for top and bottom */
     text-align: center;
     font-size: 14px;
+    /*
     position: absolute;
     bottom: 0;
+    */
+    margin-top: 30px;
     width: 100%;
 }
 
 .cool-footer a {
-    color: #007700; /* Link color */
+    color: #fff; /* Link color */
     text-decoration: none;
 }
 

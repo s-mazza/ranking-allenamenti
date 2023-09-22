@@ -24,7 +24,7 @@
             <tr>
                 <td class="user-name">{{ row['User'] }}</td>
                 {% for problem in problems %}
-                <td style="background-color: rgba(0, 255, 0, {{ row[problem] / 100.0 }});">{{ row[problem] }}</td>
+                <td style="background-color: rgba({{ 255 - (row[problem] * 2.55)|int }}, 255, 0, {{0 if row[problem] == 0 else 1}});">{{ row[problem] }}</td>
                 {% endfor %}
                 <td>{{ row['Total'] }}</td>                    
             </tr>
@@ -41,6 +41,7 @@
     
     <footer class="cool-footer">
         <p>Author: @mazzasimon</p>
+        <p>Wiki: <a>https://allenamenti.eliasol.it/it/home/olinfo/problemi</a></p>
     </footer>
 </body>
 </html>
